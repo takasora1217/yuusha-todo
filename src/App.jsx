@@ -1,15 +1,12 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom"
+import Top from "./pages/Top"
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <span>moji</span>
-      </div>
-    </>
-  );
+    <Routes>
+      <Route path="/" element={<Top />} />
+    </Routes>
+  )
 }
 
-export default App;
+export default App
