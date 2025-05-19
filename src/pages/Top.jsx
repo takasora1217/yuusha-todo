@@ -1,11 +1,11 @@
-import InputForm from '../components/InputForm'
+import InputForm from '../components/InputForm';
 
-
-const Top = () => {
-  return (
-    <><InputForm />
-    </>
-  )
+const Top = ({ taskList, setTaskList }) => {
+    return (
+        <>
+            <InputForm taskList={taskList} setTaskList={setTaskList} />
+        </>
+    );
 }
 
-export default Top
+export default Top;
