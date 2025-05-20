@@ -1,11 +1,11 @@
-import React from 'react'
+import { useState } from 'react';
+import InputForm from '../components/InputForm';
 
-
-const Top = () => {
-  return (
-    <>
-    </>
-  )
+const Top = ({}) => {
+const [taskList,setTaskList]=useState([]);
+    return (
+        <InputForm InputForm taskList={taskList} setTaskList={setTaskList} />)
+        
 }
 
-export default Top
+export default Top;
