@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { v4 as uuidv4 } from 'uuid';
 
 const InputForm = ({ taskList, setTaskList }) => {
     const [inputText, setInputText] = useState("");
@@ -8,7 +9,7 @@ const InputForm = ({ taskList, setTaskList }) => {
         e.preventDefault();
         if (inputText.trim() === "") return;
 
-        setTaskList([...taskList, { text: inputText }]);
+        setTaskList([...taskList, { text: inputText,title:inputText,id: uuidv4(),completed: false}])
         setInputText("");
     };
 
@@ -28,14 +29,7 @@ const InputForm = ({ taskList, setTaskList }) => {
                 <button type="submit" className="text-blue-500 hover:text-blue-800 mt-6">
                     <IoIosAddCircleOutline size={35} />
                 </button>
-            </form>
-
-            {}
-            <ul>
-                {taskList.map((task, index) => (
-                    <li key={index} className=" p-2 text-center border border-1 rounded-lg border-black hover:bg-gray-200">{task.text}</li>
-                ))}
-            </ul>
+            </form>    
         </div>
     );
 };

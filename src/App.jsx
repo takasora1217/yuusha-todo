@@ -1,17 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import Top from "./pages/Top";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom"
+import Top from "./pages/Top"
 
 function App() {
-    const [taskList, setTaskList] = useState([]);
-
     return (
         <div className="body">
             <Routes>
-                <Route path="/" element={<Top taskList={taskList} setTaskList={setTaskList} />} />
+                <Route path="/" element={<Top/>} />
             </Routes>
         </div>
     );
 }
-
-export default App;
+export default App
