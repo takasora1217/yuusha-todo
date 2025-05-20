@@ -9,7 +9,7 @@ const InputForm = ({ taskList, setTaskList }) => {
         e.preventDefault();
         if (inputText.trim() === "") return;
 
-        setTaskList([...taskList, { text: inputText,title:inputText,id: uuidv4(),completed: false}])
+        setTaskList([...taskList, {title:inputText,id: uuidv4(),completed: false}])
         setInputText("");
     };
 
