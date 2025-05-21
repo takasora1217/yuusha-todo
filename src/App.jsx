@@ -1,12 +1,18 @@
-import { Routes, Route } from "react-router-dom"
-import Top from "./pages/Top"
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Top from "./pages/Top";
+import Congrat from "./pages/Congrat";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Top />} />
-    </Routes>
-  )
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Top} />
+          <Route path="/congrat" component={Congrat} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
