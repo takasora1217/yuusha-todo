@@ -1,5 +1,3 @@
-import React from "react";
-
 const ProgressBar = ({ completedCount }) => {
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
   // 10個ごとにバーが0%になる

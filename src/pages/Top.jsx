@@ -1,10 +1,14 @@
 import React from 'react'
+import ProgressBar from '../components/ProgressBar'
 
 
 const Top = () => {
   return (
     <>
-      <div>d</div>
+      <div>
+        <ProgressBar>
+        </ProgressBar>
+      </div>
     </>
   )
 }

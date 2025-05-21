@@ -4,12 +4,9 @@ import ProgressBar from "./components/ProgressBar";
 
 function App() {
   return (
-    <>
-    <ProgressBar/>
-      <Routes>
-        <Route path="/" element={<Top />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Top />} />
+    </Routes>
   );
 }
 
