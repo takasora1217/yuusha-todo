@@ -52,7 +52,7 @@ export const TodoList = ({
   };
 
   return (
-    <div className="flex flex-col space-y-2 m-16">
+    <>
       {taskList.map((task) => (
         <div key={task.id} className="flex items-center space-x-2">
           <div className="border-solid border-2 border-black w-64 h-6 grid-rows-1">
@@ -68,7 +68,7 @@ export const TodoList = ({
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

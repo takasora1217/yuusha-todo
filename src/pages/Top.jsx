@@ -8,12 +8,14 @@ const Top = () => {
   return (
     <>
       <InputForm InputForm taskList={taskList} setTaskList={setTaskList} />
-      <TodoList
-        taskList={taskList}
-        setTaskList={setTaskList}
-        completedCount={completedCount}
-        setCompletedCount={setCompletedCount}
-      />
+      <div className="flex flex-col space-y-2 m-16">
+        <TodoList
+          taskList={taskList}
+          setTaskList={setTaskList}
+          completedCount={completedCount}
+          setCompletedCount={setCompletedCount}
+        />
+      </div>
     </>
   );
 };
