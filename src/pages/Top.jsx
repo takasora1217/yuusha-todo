@@ -11,8 +11,9 @@ const Top = () => {
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
+  
   useEffect(() => {
-        localStorage.setItem("taskList", JSON.stringify(taskList));
+    localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
   
    useEffect(() => {
@@ -50,7 +51,6 @@ const Top = () => {
             />
           </div>
         </div>
-      </div>
     </>
   );
 };
