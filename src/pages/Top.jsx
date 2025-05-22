@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
@@ -10,6 +10,10 @@ const Top = () => {
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
+  
   return (
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen">
