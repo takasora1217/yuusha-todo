@@ -11,6 +11,7 @@ const ProgressBar = ({ completedCount }) => {
           ></div>
         </div>
       </div>
+      <div className="font-bold ml-[75%]">{progress}/100</div>
     </>
   );
 };
