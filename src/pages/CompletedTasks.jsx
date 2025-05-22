@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 const CompletedTasks = () => {
-  const [completedTasks] = useState(JSON.parse(localStorage.getItem(CompletedTasks))||[ ])
+  const [completedTasks] = useState(JSON.parse(localStorage.getItem("completedTasks"))||[ ])
 
   return (
     <div className="flex flex-col justify-center items-center">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
 import yuusha from "../images/yuusha-1.png";
@@ -8,6 +8,10 @@ const Top = () => {
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
+  
   return (
     <>
       <div className="flex flex-col items-center ">
