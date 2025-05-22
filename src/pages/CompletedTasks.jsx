@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from "react"
 
 const CompletedTasks = () => {
-  const [tasks, setTasks] = useState([])
-
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("completedTasks")
-    if (storedTasks) {
-      try {
-        setTasks(JSON.parse(storedTasks))
-      } catch (error) {
-        console.error("Error parsing completedTasks:", error)
-      }
-    }
-  }, [])
+  const [completedTasks] = useState(JSON.parse(localStorage.getItem(CompletedTasks))||[ ])
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="text-3xl m-20">完了したタスク</div>
+      <div className="max-w-2xl mx-auto">
+        {completedTasks.length> 0 ?(
+          <ul className="space-y-4">
+            {completedTasks.map((task)=>(
+              <li key={task.id}className="bg-gray-100 p-4 rounded-lg shadow">
+                <div className="flex items-center">
+                  <span className="text-gray-700">{task.title}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ):(
+          <p className="text-center text-gray-500">完了したタスクはありません</p>
+        )}
+      </div>
+
       <div className="space-y-2">
-        {tasks.map((task) => (
+        {completedTasks.map((task)=>(
           <div
             key={task.id}
-            className="flex justify-center border-2 border-black mx-auto w-64 p-2"
-          >
-            {task.name}
+            className="flex justify-center border-2 border-black mx-auto w-64 p-2">
+            {task.title}
           </div>
         ))}
       </div>
