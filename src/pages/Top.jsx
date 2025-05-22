@@ -7,7 +7,7 @@ const Top = ({}) => {
   const [taskList, setTaskList] = useState([]);
   return (
     <>
-      <div className="flex flex-col justify-center ">
+      <div className="flex flex-col justify-center items-center ">
         <img src={boss} alt="boss" className="w-64" />
         <InputForm InputForm taskList={taskList} setTaskList={setTaskList} />
         <img src={yuusha} alt="yuusha" className="w-56" />
