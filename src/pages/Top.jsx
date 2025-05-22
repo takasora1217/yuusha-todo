@@ -9,16 +9,16 @@ const Top = () => {
   return (
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen">
-        <div className="absolute top-0 right-0 m-4">
+        <div className="absolute top-0 right-32 m-4">
           <Link to="/CompletedTasks">
             <button className="bg-[#D3FFC7] py-2 px-6 rounded-lg border-[1px] border-black hover:bg-[#A4E791]">
               完了したタスクを見る
             </button>
           </Link>
         </div>
-        <img src={boss} alt="boss" className="w-64 mb-8" />
+        <img src={boss} alt="boss" className="w-64" />
         <InputForm taskList={taskList} setTaskList={setTaskList} />
-        <img src={yuusha} alt="yuusha" className="w-56 mt-8" />
+        <img src={yuusha} alt="yuusha" className="w-56" />
       </div>
     </>
   );
