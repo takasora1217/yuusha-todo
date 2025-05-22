@@ -10,7 +10,7 @@ const CompletedTasks = () => {
         {completedTasks.length> 0 ?(
           <ul className="space-y-4">
             {completedTasks.map((task)=>(
-              <li key={task.id}className="bg-gray-100 p-4 rounded-lg shadow">
+              <li key={task.id}className="flex justify-center border-2 border-black mx-auto w-64">
                 <div className="flex items-center">
                   <span className="text-gray-700">{task.title}</span>
                 </div>
@@ -26,7 +26,7 @@ const CompletedTasks = () => {
         {completedTasks.map((task)=>(
           <div
             key={task.id}
-            className="flex justify-center border-2 border-black mx-auto w-64 p-2">
+            className="flex justify-center border-2 border-black mx-auto w-64">
             {task.title}
           </div>
         ))}
