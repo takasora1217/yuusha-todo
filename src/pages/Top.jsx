@@ -12,12 +12,12 @@ const Top = () => {
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
-  
+
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
-  
-   useEffect(() => {
+
+  useEffect(() => {
     if (completedCount > 0) {
       setanimatingBoss(true);
       setTimeout(() => {
@@ -25,18 +25,20 @@ const Top = () => {
       }, 1000);
     }
   }, [completedCount]);
-  
+
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
   // 10個ごとにバーが0%になる
-  
+
   return (
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen">
-        <div className="font-bold ml-[15%] mt-8">HP</div>
-            <div className="flex justify-center items-center">
-              <ProgressBar completedCount={completedCount} />
-            </div>
-        <div className="font-bold ml-[75%]">{progress}/100</div>
+        <div className="w-full">
+          <div className="font-bold ml-[15%] mt-8">HP</div>
+          <div className="flex justify-center items-center">
+            <ProgressBar completedCount={completedCount} />
+          </div>
+          <div className="font-bold ml-[75%]">{progress}/100</div>
+        </div>
         <div className="absolute top-0 right-32 m-4">
           <Link to="/CompletedTasks">
             <button className="bg-[#D3FFC7] py-2 px-6 rounded-lg border-[1px] border-black hover:bg-[#A4E791]">
@@ -44,11 +46,13 @@ const Top = () => {
             </button>
           </Link>
         </div>
-        <img src={boss}
-            alt="boss"
-            className={`w-64 transition-all duration-500 ${
-              animatingBoss ? "nimate-pulse p-4 rounded-md " : ""
-            }`}/>
+        <img
+          src={boss}
+          alt="boss"
+          className={`w-64 transition-all duration-500 ${
+            animatingBoss ? "nimate-pulse p-4 rounded-md " : ""
+          }`}
+        />
         <InputForm taskList={taskList} setTaskList={setTaskList} />
         <img src={yuusha} alt="yuusha" className="w-56" />
         <div className="absolute top-24 left-16 space-y-2">
@@ -57,9 +61,9 @@ const Top = () => {
             setTaskList={setTaskList}
             completedCount={completedCount}
             setCompletedCount={setCompletedCount}
-            />
-          </div>
+          />
         </div>
+      </div>
     </>
   );
 };
