@@ -4,6 +4,7 @@ import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
 import yuusha from "../images/yuusha-1.png";
 import TodoList from "../components/TodoList";
+import ProgressBar from "../components/ProgressBar";
 
 const Top = () => {
   const [animatingBoss, setanimatingBoss] = useState(false);
@@ -25,9 +26,17 @@ const Top = () => {
     }
   }, [completedCount]);
   
+  const progress = Math.max(0, 100 - (completedCount % 10) * 10);
+  // 10個ごとにバーが0%になる
+  
   return (
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen">
+        <div className="font-bold ml-[15%] mt-8">HP</div>
+            <div className="flex justify-center items-center">
+              <ProgressBar completedCount={completedCount} />
+            </div>
+        <div className="font-bold ml-[75%]">{progress}/100</div>
         <div className="absolute top-0 right-32 m-4">
           <Link to="/CompletedTasks">
             <button className="bg-[#D3FFC7] py-2 px-6 rounded-lg border-[1px] border-black hover:bg-[#A4E791]">
