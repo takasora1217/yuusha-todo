@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
 import yuusha from "../images/yuusha-1.png";
@@ -16,10 +16,19 @@ const Top = () => {
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
-
+  const navigate = useNavigate();
+  const [lastCongratCounts, setLastCongratCounts] = useState(
+    () => JSON.parse(localStorage.getItem("lastCongratCounts")) || 0
+  );
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
+  useEffect(() => {
+    localStorage.setItem(
+      "lastCongratCounts",
+      JSON.stringify(lastCongratCounts)
+    );
+  }, [lastCongratCounts]);
 
   useEffect(() => {
     if (completedCount > 0) {
@@ -32,6 +41,20 @@ const Top = () => {
 
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
   // 10個ごとにバーが0%になる
+
+  // progressが0になったらCongratへ遷移
+
+  useEffect(() => {
+    // Congratから戻った場合は遷移しない
+    if (
+      completedCount > 0 &&
+      completedCount % 10 === 0 &&
+      lastCongratCounts !== completedCount
+    ) {
+      setLastCongratCounts(completedCount);
+      navigate("/congrat");
+    }
+  }, [completedCount, navigate]);
 
   return (
     <>
@@ -59,7 +82,9 @@ const Top = () => {
             }`}
           />
           <div>
-            <h5 className="font-bold">討伐数：{Math.floor(completedCount /10)}</h5>
+            <h5 className="font-bold">
+              討伐数：{Math.floor(completedCount / 10)}
+            </h5>
           </div>
         </div>
         <InputForm taskList={taskList} setTaskList={setTaskList} />
