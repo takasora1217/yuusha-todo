@@ -4,11 +4,8 @@ const Congrat = () => {
   const navigate = useNavigate();
 
   const handleBackToTop = () => {
-    sessionStorage.setItem("fromCongrat", "true");
     navigate("/");
   };
-  // sessionStorageに値を保存して、Top.jsxで取得する
-  // sessionStorageはブラウザを閉じるまでデータが保存される
   return (
     <>
       <div className="flex flex-col justify-center h-[500px] items-center">
