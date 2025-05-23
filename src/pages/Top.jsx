@@ -8,7 +8,11 @@ import ProgressBar from "../components/ProgressBar";
 
 const Top = () => {
   const [animatingBoss, setanimatingBoss] = useState(false);
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(
+    () => JSON.parse(localStorage.getItem("taskList")) || []
+    //ローカルストレージからタスクリストを取得して、taskListに代入する/もしローカルストレージが空の場合は空の配列を代入する
+    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要）
+  );
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
   );
