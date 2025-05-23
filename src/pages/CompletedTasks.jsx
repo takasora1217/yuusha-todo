@@ -7,7 +7,9 @@ const CompletedTasks = () => {
   );
 
   const handleDelete = (id) => {
-    setCompletedtasks(completedTasks.filter((task) => task.id !== id));
+    const updatedTasks = completedTasks.filter((task) => task.id !== id);
+    setCompletedtasks(updatedTasks);
+    localStorage.setItem("completedTasks", JSON.stringify(updatedTasks));
   };
 
   return (
