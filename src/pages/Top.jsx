@@ -54,7 +54,7 @@ const Top = () => {
       setLastCongratCounts(completedCount);
       navigate("/congrat");
     }
-  }, [completedCount, navigate]);
+  }, [completedCount, navigate, lastCongratCounts]);
 
   return (
     <>
