@@ -46,13 +46,18 @@ const Top = () => {
             </button>
           </Link>
         </div>
-        <img
-          src={boss}
-          alt="boss"
-          className={`w-64 transition-all duration-500 ${
-            animatingBoss ? "nimate-pulse p-4 rounded-md " : ""
-          }`}
-        />
+        <div className="flex items-center">
+          <img
+            src={boss}
+            alt="boss"
+            className={`w-64 transition-all duration-500 ${
+              animatingBoss ? "nimate-pulse p-4 rounded-md " : ""
+            }`}
+          />
+          <div>
+            <h5>討伐数：{Math.floor(completedCount /10)}</h5>
+          </div>
+        </div>
         <InputForm taskList={taskList} setTaskList={setTaskList} />
         <img src={yuusha} alt="yuusha" className="w-56" />
         <div className="absolute top-24 left-16 space-y-2">
