@@ -31,40 +31,21 @@ const Top = () => {
   }, [completedCount]);
 
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
-  // 10個ごとにバーが0%になる
 
   return (
     <>
-      <div className="relative flex flex-col items-center justify-center min-h-screen">
+      <div className="flex-col items-center justify-center min-h-screen space-y-6">
         <div className="w-full">
-          <div className="font-bold ml-[15%] mt-8">HP</div>
+          <div className="font-bold ml-[15%] mt-8 text-2xl">HP</div>
           <div className="flex justify-center items-center">
             <ProgressBar completedCount={completedCount} />
           </div>
-          <div className="font-bold ml-[75%]">{progress}/100</div>
+          <div className="font-bold text-2xl ml-[75%]">{progress}/100</div>
         </div>
-        <div className="absolute top-0 right-32 m-4">
-          <Link to="/CompletedTasks">
-            <button className="bg-[#D3FFC7] py-2 px-6 rounded-lg border-[1px] border-black hover:bg-[#A4E791]">
-              完了したタスクを見る
-            </button>
-          </Link>
-        </div>
-        <div className="flex items-center">
-          <img
-            src={boss}
-            alt="boss"
-            className={`w-64 transition-all duration-500 ${
-              animatingBoss ? "nimate-pulse p-4 rounded-md " : ""
-            }`}
-          />
-          <div>
-            <h5 className="font-bold">討伐数：{Math.floor(completedCount /10)}</h5>
-          </div>
-        </div>
-        <InputForm taskList={taskList} setTaskList={setTaskList} />
-        <img src={yuusha} alt="yuusha" className="w-56" />
-        <div className="absolute top-24 left-16 space-y-2">
+        {/* ここから三列 */}
+        <div className="flex flex-wrap w-full justify-around px-10 ">
+          {/* ここからTODO */}
+        <div className="mr-auto">
           <TodoList
             taskList={taskList}
             setTaskList={setTaskList}
@@ -72,6 +53,32 @@ const Top = () => {
             setCompletedCount={setCompletedCount}
           />
         </div>
+        {/* ここまでがTODO */}
+        {/* ここから写真 */}
+        <div className=" absolute flex flex-col items-center -mt-20">
+          <img
+            src={boss}
+            alt="boss"
+            className={`w-64 transition-all duration-500 ${
+              animatingBoss ? "animate-pulse p-4 rounded-md " : ""
+            }`}
+          />
+        <InputForm taskList={taskList} setTaskList={setTaskList} />
+        <img src={yuusha} alt="yuusha" className="w-56" />
+        </div>
+        {/* ここまでが写真 */}
+        {/* ここからボタンなど */}
+        <div className="ml-auto flex flex-col gap-10">
+          <Link to="/CompletedTasks">
+            <button className="py-3 px-10 rounded-lg border-[2px] border-black text-3xl">
+              完了したタスクを見る
+            </button>
+          </Link>
+          <h5 className="font-bold text-6xl italic">討伐数：{Math.floor(completedCount /10)}</h5>
+        </div>
+        {/* ここまでがボタンなど */}
+      </div>
+      {/* ここまでが3列 */}
       </div>
     </>
   );
