@@ -27,10 +27,10 @@ const InputForm = ({ taskList, setTaskList }) => {
         value={inputText}
         onChange={handleChange}
         placeholder="TODOを入力"
-        className="border border-solid border-2 rounded border-black px-4 py-2;"
+        className="border border-solid border-2 rounded border-black px-6 py-3"
       />
       <button type="submit" className="text-blue-500 hover:text-blue-800">
-        <IoIosAddCircleOutline size={35} />
+        <IoIosAddCircleOutline size={50} />
       </button>
     </form>
   );

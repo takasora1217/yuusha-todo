@@ -42,7 +42,7 @@ const CompletedTasks = () => {
       </div>
 
       <button
-        className="fixed bottom-6 py-2 px-6 border-2 border-black rounded-lg top-0 right-0 w-50 h-16 bg-blue-300 mt-8 mr-20 hover:bg-blue-400"
+        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 py-2 px-6 border-2 border-black rounded-lg bg-blue-300 hover:bg-blue-400"
         onClick={() => (window.location.href = "/")}
       >
         トップページに戻る

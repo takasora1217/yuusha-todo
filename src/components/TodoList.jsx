@@ -68,15 +68,15 @@ export const TodoList = ({
             animatingtask === task.id ? "transform translate-x-full" : ""
           }`}
         >
-          <div className="border-solid border-2 border-black w-64 h-6 grid-rows-1">
+          <div className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4">
             <span>{task.title}</span>
           </div>
           <div className="flex space-x-1">
-            <button onClick={() => handleDone(task.id)}>
-              <LuSwords />
+            <button onClick={() => handleDone(task.id)}className="mt-4">
+              <LuSwords size={28}/>
             </button>
-            <button onClick={() => handleDelete(task.id)}>
-              <FaTrashAlt />
+            <button onClick={() => handleDelete(task.id)}className="mt-4">
+              <FaTrashAlt size={28}/>
             </button>
           </div>
         </div>
