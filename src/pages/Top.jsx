@@ -55,7 +55,7 @@ const Top = () => {
             }`}
           />
           <div>
-            <h5>討伐数：{Math.floor(completedCount /10)}</h5>
+            <h5 className="font-bold">討伐数：{Math.floor(completedCount /10)}</h5>
           </div>
         </div>
         <InputForm taskList={taskList} setTaskList={setTaskList} />
