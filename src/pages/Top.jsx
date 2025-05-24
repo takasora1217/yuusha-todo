@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
+import boss2 from "../images/boss2.png";
+import boss3 from "../images/boss3.png";
+import boss4 from "../images/boss4.png";
+import boss5 from "../images/boss5.png";
+import boss6 from "../images/boss6.png";
 import yuusha from "../images/yuusha-1.png";
 import TodoList from "../components/TodoList";
 import ProgressBar from "../components/ProgressBar";
@@ -89,12 +94,13 @@ const Top = () => {
             </div>
             {/* ここまでがTODO */}
             {/* ここから写真と入力フォーム */}
-            <div className=" absolute flex flex-col items-center mt-20">
+            <div className="absolute flex flex-col items-center mt-20">
               <img
-                src={boss}
+                src={bossImage}
                 alt="boss"
-                className={`w-64 transition-all duration-500 -mt-32 
-          ${animatingBoss ? "animate-pulse p-4 rounded-md " : ""}`}
+                className={`w-64 transition-all duration-500 -mt-32 ${
+                  animatingBoss ? "animate-pulse p-4 rounded-md" : ""
+                }`}
               />
               <InputForm taskList={taskList} setTaskList={setTaskList} />
               <img src={yuusha} alt="yuusha" className="w-56" />
