@@ -14,7 +14,7 @@ const CompletedTasks = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="text-5xl m-6">完了したタスク</div>
+      <div className="text-5xl m-6 font-bold">完了したタスク</div>
       <div className="max-w-2xl mx-auto">
         {completedTasks.length > 0 ? (
           <ul className="space-y-4">
@@ -22,14 +22,13 @@ const CompletedTasks = () => {
               <div className="flex space-x-2">
                 <li
                   key={task.id}
-                  className="flex justify-center border-2 border-black mx-auto w-64"
-                >
+                  className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-2">
                   <div className="flex items-center">
                     <span className="text-gray-700">{task.title}</span>
                   </div>
                 </li>
-                <button onClick={() => handleDelete(task.id)}>
-                  <FaTrashAlt />
+                <button onClick={() => handleDelete(task.id)} >
+                  <FaTrashAlt size={26} className="mt-2"/>
                 </button>
               </div>
             ))}
@@ -42,10 +41,9 @@ const CompletedTasks = () => {
       </div>
 
       <button
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 py-2 px-6 border-2 border-black rounded-lg bg-blue-300 hover:bg-blue-400"
+         className="fixed top-10 right-10 bg-blue-600 text-white py-5 px-12 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg"
         onClick={() => (window.location.href = "/")}
-      >
-        トップページに戻る
+      >トップページに戻る
       </button>
     </div>
   );

@@ -11,7 +11,7 @@ const Top = () => {
   const [taskList, setTaskList] = useState(
     () => JSON.parse(localStorage.getItem("taskList")) || []
     //ローカルストレージからタスクリストを取得して、taskListに代入する/もしローカルストレージが空の場合は空の配列を代入する
-    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要）
+    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要
   );
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
@@ -41,7 +41,7 @@ const Top = () => {
 
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
 
-  // progressが0になったらCongratへ遷移
+  // progressが0になったらcongratへ遷移
 
   useEffect(() => {
     // Congratから戻った場合は遷移しない
@@ -59,7 +59,7 @@ const Top = () => {
     <>
       <div className="flex-col items-center justify-center min-h-screen space-y-6">
         <div className="w-full">
-          <div className="font-bold ml-[15%] mt-8 text-2xl">HP</div>
+          <div className="font-bold ml-[15%] mt-2 text-2xl">HP</div>
           <div className="flex justify-center items-center">
             <ProgressBar completedCount={completedCount} />
           </div>
@@ -77,23 +77,23 @@ const Top = () => {
           />
         </div>
         {/* ここまでがTODO */}
-        {/* ここから写真 */}
-        <div className=" absolute flex flex-col items-center -mt-20">
+        {/* ここから写真と入力フォーム */}
+        <div className=" absolute flex flex-col items-center mt-20">
           <img
             src={boss}
             alt="boss"
-            className={`w-64 transition-all duration-500 ${
-              animatingBoss ? "animate-pulse p-4 rounded-md " : ""
-            }`}
+            className={`w-64 transition-all duration-500 -mt-32 
+ ${
+              animatingBoss ? "animate-pulse p-4 rounded-md " : ""}`}
           />
         <InputForm taskList={taskList} setTaskList={setTaskList} />
         <img src={yuusha} alt="yuusha" className="w-56" />
         </div>
-        {/* ここまでが写真 */}
+        {/* ここまでが写真と入力フォーム */}
         {/* ここからボタンなど */}
         <div className="ml-auto flex flex-col gap-10">
           <Link to="/CompletedTasks">
-            <button className="py-3 px-10 rounded-lg border-[2px] border-black text-3xl">
+            <button className="bg-blue-600 text-white py-6 px-14 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg">
               完了したタスクを見る
             </button>
           </Link>
