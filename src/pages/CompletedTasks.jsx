@@ -20,9 +20,9 @@ const CompletedTasks = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
-        width: "100vw",
+        width: "100%",
       }}
-      className="flex-col items-center justify-center space-y-6"
+      className="bg-fixed flex-col items-center justify-center space-y-6"
     >
       <div className="flex flex-col justify-center items-center">
         <div className="text-5xl m-6 font-bold">完了したタスク</div>

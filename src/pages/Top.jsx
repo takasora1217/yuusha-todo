@@ -64,13 +64,13 @@ const Top = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "100vh",
-          width: "100vw",
+          width:"100%",
         }}
-        className="flex-col items-center justify-center space-y-6"
+        className=" bg-fixed flex-col items-center justify-center space-y-6"
       >
         <div className="flex-col items-center justify-center min-h-screen space-y-6">
           <div className="w-full">
-            <div className="font-bold ml-[15%] mt-2 text-2xl">HP</div>
+            <div className="font-bold ml-[15%] pt-2 text-2xl">HP</div>
             <div className="flex justify-center items-center">
               <ProgressBar completedCount={completedCount} />
             </div>
