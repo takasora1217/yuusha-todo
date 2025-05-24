@@ -55,7 +55,7 @@ const CompletedTasks = () => {
           className="fixed top-10 right-10 bg-blue-600 text-white py-5 px-12 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg"
           onClick={() => (window.location.href = "/")}
         >
-          トップページに戻る
+          戦闘に戻る
         </button>
       </div>
     </div>

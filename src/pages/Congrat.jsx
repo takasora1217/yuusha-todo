@@ -35,7 +35,7 @@ const Congrat = () => {
           tweenDuration={2000}
         />
         <div className="flex flex-col justify-center h-[500px] items-center">
-          <h1 className="text-3xl">
+          <h1 className="font-bold text-6xl italic underline text-[#FFB120] shadow-2xl">
             討伐おめでとう！！次のボスを倒しに行こう！！！
           </h1>
           <button

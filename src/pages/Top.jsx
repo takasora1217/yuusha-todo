@@ -104,7 +104,7 @@ const Top = () => {
             <div className="ml-auto flex flex-col gap-10">
               <Link to="/CompletedTasks">
                 <button className="bg-blue-600 text-white py-6 px-14 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg">
-                  完了したタスクを見る
+                  戦歴を振り返る
                 </button>
               </Link>
               <h5 className="font-bold text-6xl italic">
