@@ -22,8 +22,7 @@ const CompletedTasks = () => {
               <div className="flex space-x-2">
                 <li
                   key={task.id}
-                  className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-2"
-                >
+                  className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-2">
                   <div className="flex items-center">
                     <span className="text-gray-700">{task.title}</span>
                   </div>

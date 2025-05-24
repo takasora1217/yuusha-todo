@@ -11,7 +11,7 @@ const Top = () => {
   const [taskList, setTaskList] = useState(
     () => JSON.parse(localStorage.getItem("taskList")) || []
     //ローカルストレージからタスクリストを取得して、taskListに代入する/もしローカルストレージが空の場合は空の配列を代入する
-    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要）
+    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要
   );
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
@@ -41,7 +41,7 @@ const Top = () => {
 
   const progress = Math.max(0, 100 - (completedCount % 10) * 10);
 
-  // progressが0になったらCongratへ遷移
+  // progressが0になったらcongratへ遷移
 
   useEffect(() => {
     // Congratから戻った場合は遷移しない
