@@ -7,7 +7,13 @@ import boss3 from "../images/boss3.png";
 import boss4 from "../images/boss4.png";
 import boss5 from "../images/boss5.png";
 import boss6 from "../images/boss6.png";
-import yuusha from "../images/yuusha-1.png";
+import boss7 from "../images/boss7.png";
+import boss8 from "../images/boss8.png";
+import boss9 from "../images/boss9.png"; 
+import boss10 from "../images/boss10.png";
+import boss11 from "../images/boss11.png";
+import boss13 from "../images/boss13.png";
+import yusha2 from "../images/yuusha.png";
 import TodoList from "../components/TodoList";
 import ProgressBar from "../components/ProgressBar";
 import background from "../images/background.png";
@@ -60,7 +66,10 @@ const Top = () => {
       navigate("/congrat");
     }
   }, [completedCount, navigate, lastCongratCounts]);
-
+ const bossImages = [boss, boss2, boss3, boss4, boss5, boss6 , boss7, boss8, boss9, boss10, boss11 , boss13];
+  const [bossImage,] = useState(
+    bossImages[Math.floor(Math.random() * bossImages.length)]
+  );
   return (
     <>
       <div
@@ -94,16 +103,16 @@ const Top = () => {
             </div>
             {/* ここまでがTODO */}
             {/* ここから写真と入力フォーム */}
-            <div className="absolute flex flex-col items-center mt-20">
+            <div className="absolute flex flex-col items-center mt-10">
               <img
                 src={bossImage}
                 alt="boss"
-                className={`w-64 transition-all duration-500 -mt-32 ${
+                className={`w-72 transition-all duration-500 -mt-36 ${
                   animatingBoss ? "animate-pulse p-4 rounded-md" : ""
                 }`}
               />
               <InputForm taskList={taskList} setTaskList={setTaskList} />
-              <img src={yuusha} alt="yuusha" className="w-56" />
+              <img src={yusha2} alt="yusha2" className="w-56" />
             </div>
             {/* ここまでが写真と入力フォーム */}
             {/* ここからボタンなど */}
