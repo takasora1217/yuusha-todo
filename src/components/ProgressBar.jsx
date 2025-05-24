@@ -1,6 +1,6 @@
 const ProgressBar = ({ completedCount }) => {
-  const progress = Math.max(0, 100 - (completedCount % 10) * 10);
-  // 10個ごとにバーが0%になる
+  const progress = Math.max(0, 100 - (completedCount % 5) * 20);
+  // 5個ごとにバーが0%になる
   return (
     <>
       <div className=" w-[70%] h-4 bg-red-500 rounded-[5px] overflow-hidden">

@@ -40,7 +40,7 @@ const Top = () => {
     }
   }, [completedCount]);
 
-  const progress = Math.max(0, 100 - (completedCount % 10) * 10);
+  const progress = Math.max(0, 100 - (completedCount % 5) * 20);
 
   // progressが0になったらcongratへ遷移
 
@@ -48,7 +48,7 @@ const Top = () => {
     // Congratから戻った場合は遷移しない
     if (
       completedCount > 0 &&
-      completedCount % 10 === 0 &&
+      completedCount % 5 === 0 &&
       lastCongratCounts !== completedCount
     ) {
       setLastCongratCounts(completedCount);
@@ -108,7 +108,7 @@ const Top = () => {
                 </button>
               </Link>
               <h5 className="font-bold text-6xl italic">
-                討伐数：{Math.floor(completedCount / 10)}
+                討伐数：{Math.floor(completedCount / 5)}
               </h5>
             </div>
             {/* ここまでがボタンなど */}
