@@ -5,6 +5,7 @@ import boss from "../images/boss.png";
 import yuusha from "../images/yuusha-1.png";
 import TodoList from "../components/TodoList";
 import ProgressBar from "../components/ProgressBar";
+import background from "../images/background.png";
 
 const Top = () => {
   const [animatingBoss, setanimatingBoss] = useState(false);
@@ -57,51 +58,63 @@ const Top = () => {
 
   return (
     <>
-      <div className="flex-col items-center justify-center min-h-screen space-y-6">
-        <div className="w-full">
-          <div className="font-bold ml-[15%] mt-2 text-2xl">HP</div>
-          <div className="flex justify-center items-center">
-            <ProgressBar completedCount={completedCount} />
+      <div
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "100vh",
+          width: "100vw",
+        }}
+        className="flex-col items-center justify-center space-y-6"
+      >
+        <div className="flex-col items-center justify-center min-h-screen space-y-6">
+          <div className="w-full">
+            <div className="font-bold ml-[15%] mt-2 text-2xl">HP</div>
+            <div className="flex justify-center items-center">
+              <ProgressBar completedCount={completedCount} />
+            </div>
+            <div className="font-bold text-2xl ml-[75%]">{progress}/100</div>
           </div>
-          <div className="font-bold text-2xl ml-[75%]">{progress}/100</div>
+          {/* ここから三列 */}
+          <div className="flex flex-wrap w-full justify-around px-10 ">
+            {/* ここからTODO */}
+            <div className="mr-auto">
+              <TodoList
+                taskList={taskList}
+                setTaskList={setTaskList}
+                completedCount={completedCount}
+                setCompletedCount={setCompletedCount}
+              />
+            </div>
+            {/* ここまでがTODO */}
+            {/* ここから写真と入力フォーム */}
+            <div className=" absolute flex flex-col items-center mt-20">
+              <img
+                src={boss}
+                alt="boss"
+                className={`w-64 transition-all duration-500 -mt-32 
+          ${animatingBoss ? "animate-pulse p-4 rounded-md " : ""}`}
+              />
+              <InputForm taskList={taskList} setTaskList={setTaskList} />
+              <img src={yuusha} alt="yuusha" className="w-56" />
+            </div>
+            {/* ここまでが写真と入力フォーム */}
+            {/* ここからボタンなど */}
+            <div className="ml-auto flex flex-col gap-10">
+              <Link to="/CompletedTasks">
+                <button className="bg-blue-600 text-white py-6 px-14 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg">
+                  完了したタスクを見る
+                </button>
+              </Link>
+              <h5 className="font-bold text-6xl italic">
+                討伐数：{Math.floor(completedCount / 10)}
+              </h5>
+            </div>
+            {/* ここまでがボタンなど */}
+          </div>
+          {/* ここまでが3列 */}
         </div>
-        {/* ここから三列 */}
-        <div className="flex flex-wrap w-full justify-around px-10 ">
-          {/* ここからTODO */}
-        <div className="mr-auto">
-          <TodoList
-            taskList={taskList}
-            setTaskList={setTaskList}
-            completedCount={completedCount}
-            setCompletedCount={setCompletedCount}
-          />
-        </div>
-        {/* ここまでがTODO */}
-        {/* ここから写真と入力フォーム */}
-        <div className=" absolute flex flex-col items-center mt-20">
-          <img
-            src={boss}
-            alt="boss"
-            className={`w-64 transition-all duration-500 -mt-32 
- ${
-              animatingBoss ? "animate-pulse p-4 rounded-md " : ""}`}
-          />
-        <InputForm taskList={taskList} setTaskList={setTaskList} />
-        <img src={yuusha} alt="yuusha" className="w-56" />
-        </div>
-        {/* ここまでが写真と入力フォーム */}
-        {/* ここからボタンなど */}
-        <div className="ml-auto flex flex-col gap-10">
-          <Link to="/CompletedTasks">
-            <button className="bg-blue-600 text-white py-6 px-14 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg">
-              完了したタスクを見る
-            </button>
-          </Link>
-          <h5 className="font-bold text-6xl italic">討伐数：{Math.floor(completedCount /10)}</h5>
-        </div>
-        {/* ここまでがボタンなど */}
-      </div>
-      {/* ここまでが3列 */}
       </div>
     </>
   );
