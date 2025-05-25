@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputForm from "../components/InputForm";
 import boss from "../images/boss.png";
-import yuusha from "../images/yuusha-1.png";
+import boss2 from "../images/boss2.png";
+import boss3 from "../images/boss3.png";
+import boss5 from "../images/boss5.png";
+import boss6 from "../images/boss6.png";
+import boss7 from "../images/boss7.png";
+import boss8 from "../images/boss8.png";
+import boss11 from "../images/boss11.png";
+import boss13 from "../images/boss13.png";
+import yuusha from "../images/yuusha.png";
 import TodoList from "../components/TodoList";
 import ProgressBar from "../components/ProgressBar";
 import background from "../images/background.png";
@@ -55,7 +63,10 @@ const Top = () => {
       navigate("/congrat");
     }
   }, [completedCount, navigate, lastCongratCounts]);
-
+ const bossImages = [boss, boss2, boss3, boss5, boss6 , boss7, boss8, boss11 , boss13];
+  const [bossImage,] = useState(
+    bossImages[Math.floor(Math.random() * bossImages.length)]
+  );
   return (
     <>
       <div
@@ -89,12 +100,13 @@ const Top = () => {
             </div>
             {/* ここまでがTODO */}
             {/* ここから写真と入力フォーム */}
-            <div className=" absolute flex flex-col items-center mt-20">
+            <div className="absolute flex flex-col items-center mt-10">
               <img
-                src={boss}
+                src={bossImage}
                 alt="boss"
-                className={`w-64 transition-all duration-500 -mt-32 
-          ${animatingBoss ? "animate-pulse p-4 rounded-md " : ""}`}
+                className={`w-72 transition-all duration-500 -mt-36 ${
+                  animatingBoss ? "animate-pulse p-4 rounded-md" : ""
+                }`}
               />
               <InputForm taskList={taskList} setTaskList={setTaskList} />
               <img src={yuusha} alt="yuusha" className="w-56" />
