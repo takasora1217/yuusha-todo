@@ -2,8 +2,12 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
-import yuusha from "../images/yuusha-1.png";
+import yuusha from "../images/yuusha.png";
 import boss from "../images/boss.png";
+import boss5 from "../images/boss5.png";
+import boss6 from "../images/boss6.png";
+import boss8 from "../images/boss8.png";
+import boss11 from "../images/boss11.png";
 import background from "../images/background.png";
 
 const Congrat = () => {
@@ -39,15 +43,19 @@ const Congrat = () => {
             討伐おめでとう！！次のボスを倒しに行こう！！！
           </h1>
           <button
-            className="bg-[#D3FFC7] mt-16 py-4 px-12 rounded-lg border-[1px] border-black hover:bg-[#A4E791]"
+            className="bg-blue-600 text-white py-4 px-10 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg mt-10"
             onClick={handleBackToTop}
           >
             次のボスへ→
           </button>
         </div>
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-end gap-8 mb-4">
-          <img src={yuusha} alt="勇者" className="w-64" />
-          <img src={boss} alt="ボス" className="w-64" />
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-end gap-8 mb-16 flex-1">
+        <img src={boss} alt="ボス" className="w-40" />
+          <img src={boss11} alt="ボス11" className="w-40"/>
+          <img src={boss8} alt="ボス8" className="w-40"/>
+          <img src={boss5} alt="ボス5" className="w-40"/>
+          <img src={boss6} alt="ボス6" className="w-40"/>
+          <img src={yuusha} alt="勇者" className="w-60"/>
         </div>
       </div>
     </>
