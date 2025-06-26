@@ -1,5 +1,6 @@
 const ProgressBar = ({ completedCount }) => {
-  const progress = Math.max(0, 100 - (completedCount % 5) * 20);
+  // Progress calculation now reflects total damage, resetting every 100 damage
+  const progress = Math.max(0, 100 - (completedCount % 100));
   // 5個ごとにバーが0%になる
 
    // 濃緑(21,128,61)→赤(239,68,68)のグラデーション

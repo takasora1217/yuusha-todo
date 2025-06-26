@@ -29,6 +29,9 @@ const Top = () => {
   const [lastCongratCounts, setLastCongratCounts] = useState(
     () => JSON.parse(localStorage.getItem("lastCongratCounts")) || 0
   );
+  const [tasksCompletedCount, setTasksCompletedCount] = useState( // 新しい状態: 達成したTODOの総数
+    () => JSON.parse(localStorage.getItem("tasksCompletedCount")) || 0
+  );
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
@@ -38,7 +41,10 @@ const Top = () => {
       JSON.stringify(lastCongratCounts)
     );
   }, [lastCongratCounts]);
-
+  useEffect(() => {
+    localStorage.setItem("tasksCompletedCount", JSON.stringify(tasksCompletedCount)); // 達成したTODO数をローカルストレージに保存
+  }, [tasksCompletedCount]);
+ 
   useEffect(() => {
     if (completedCount > 0) {
       setanimatingBoss(true);
@@ -48,15 +54,15 @@ const Top = () => {
     }
   }, [completedCount]);
 
-  const progress = Math.max(0, 100 - (completedCount % 5) * 20);
+  // progress calculation changed to reflect total damage
+  const progress = Math.max(0, 100 - (completedCount % 100));
 
   // progressが0になったらcongratへ遷移
-
   useEffect(() => {
     // Congratから戻った場合は遷移しない
+    // 合計ダメージが新たなボス討伐の閾値（100の倍数）を超えたときに遷移をトリガーする
     if (
-      completedCount > 0 &&
-      completedCount % 5 === 0 &&
+      Math.floor(completedCount / 100) > Math.floor(lastCongratCounts / 100) &&
       lastCongratCounts !== completedCount
     ) {
       setLastCongratCounts(completedCount);
@@ -96,6 +102,7 @@ const Top = () => {
                 setTaskList={setTaskList}
                 completedCount={completedCount}
                 setCompletedCount={setCompletedCount}
+                setTasksCompletedCount={setTasksCompletedCount} // 新しいセッター関数をTodoListに渡す
               />
             </div>
             {/* ここまでがTODO */}
@@ -119,8 +126,9 @@ const Top = () => {
                   戦歴を振り返る
                 </button>
               </Link>
+              {/* Subjugation count now based on total damage divided by 100*/}
               <h5 className="font-bold text-6xl italic">
-                討伐数：{Math.floor(completedCount / 5)}
+                討伐数：{Math.floor(completedCount / 100)}
               </h5>
             </div>
             {/* ここまでがボタンなど */}
