@@ -93,7 +93,7 @@ export const TodoList = ({
           }`}
         >
           <div className="border-solid border-2 border-black w-80 h-auto items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4 py-2">
-            <span>{task.title} (重さ: {task.weight})</span>
+            <span>{task.title} (重さ: {task.weight}) (攻撃力: {task.weight * 10})</span>
             {task.createdAt && (
               <p className="text-sm text-gray-500 mt-1">
                 追加: {formatElapsedTime(task.createdAt)}
