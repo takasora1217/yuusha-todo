@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes boss-fall {
+  0% {
+    transform: rotate(0deg) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(1080deg) translateY(250vh); 
+    opacity: 0;
+  }
+}
+
+.boss-falling {
+  animation: boss-fall 1.6s ease-in-out forwards;
+}
+
+@keyframes boss-attack-shake {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px) translateY(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px) translateY(5px);
+  }
+}
+
+.boss-attack-shake {
+  animation: boss-attack-shake 0.3s ease-in-out;
+}
+
+
+@keyframes hero-attack-intense {
+  0% {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(30px) translateY(-25px) scaleX(1.3) scaleY(0.7) rotate(10deg); 
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(20px) translateY(0px) scaleX(0.7) scaleY(1.3) rotate(-10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.hero-attack-animation {
+  animation: hero-attack-intense 0.25s ease-out forwards;
+}
