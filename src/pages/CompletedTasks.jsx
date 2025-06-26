@@ -7,6 +7,27 @@ const CompletedTasks = () => {
     JSON.parse(localStorage.getItem("completedTasks")) || []
   );
 
+  const formatElapsedTime = (timestamp) => {
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+
+    if (seconds < 60) {
+      return `${seconds}秒前`;
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+      return `${minutes}分前`;
+    }
+
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) {
+      return `${hours}時間前`;
+    }
+
+    const days = Math.floor(hours / 24);
+    return `${days}日前`;
+  };
+
   const handleDelete = (id) => {
     const updatedTasks = completedTasks.filter((task) => task.id !== id);
     setCompletedtasks(updatedTasks);
@@ -30,13 +51,17 @@ const CompletedTasks = () => {
           {completedTasks.length > 0 ? (
             <ul className="space-y-4">
               {completedTasks.map((task) => (
-                <div className="flex space-x-2">
+                <div className="flex space-x-2" key={task.id}>
                   <li
-                    key={task.id}
-                    className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-2"
+                    className="border-solid border-2 border-black w-80 h-auto items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-2 py-2"
                   >
-                    <div className="flex items-center">
+                    <div className="flex flex-col">
                       <span className="text-gray-700">{task.title}</span>
+                      {task.createdAt && (
+                        <p className="text-sm text-gray-500 mt-1">
+                          完了: {formatElapsedTime(task.createdAt)}
+                        </p>
+                      )}
                     </div>
                   </li>
                   <button onClick={() => handleDelete(task.id)}>

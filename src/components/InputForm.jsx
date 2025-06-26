@@ -12,10 +12,16 @@ const InputForm = ({ taskList, setTaskList }) => {
 
     setTaskList([
       ...taskList,
-      { title: inputText, id: uuidv4(), completed: false, weight: weight },
+      {
+        title: inputText,
+        id: uuidv4(),
+        completed: false,
+        weight: weight,
+        createdAt: Date.now(), // タイムスタンプを保存するためにこの行を追加
+      },
     ]);
     setInputText("");
-    setWeight(1); //重さリセっと
+    setWeight(1); //重さリセット
   };
 
   const handleChange = (e) => {
