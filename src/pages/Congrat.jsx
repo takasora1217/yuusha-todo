@@ -42,8 +42,11 @@ const Congrat = () => {
           <h1 className="font-bold text-6xl italic underline text-[#FFB120] shadow-2xl">
             討伐おめでとう！！次のボスを倒しに行こう！！！
           </h1>
+          <p className="text-2xl mt-4 text-white">
+            これであなたは{localStorage.getItem("completedCount")}個のタスクを完了しました！
+          </p>
           <button
-            className="bg-blue-600 text-white py-4 px-10 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg mt-10"
+            className="bg-blue-600 text-white py-4 px-10 rounded-md text-2xl font-semibold transition-transform duration-200 transform hover:bg-blue-700 hover:shadow-lg mt-10 relative z-10"
             onClick={handleBackToTop}
           >
             次のボスへ→
