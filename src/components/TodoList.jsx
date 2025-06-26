@@ -56,7 +56,7 @@ export const TodoList = ({
       });
 
       const completedTask = updatedTasks.find((task) => task.id === id);
-      const baseDamage = completedTask.weight * 10; // 元々のダメージ計算
+      const baseDamage = completedTask.weight * 10; // 元々のダメ計算
 
       // 経過時間に基づいてダメージを減らす
       const elapsedMilliseconds = currentTime - completedTask.createdAt;
@@ -94,7 +94,6 @@ export const TodoList = ({
   return (
     <>
       {taskList.map((task) => {
-        // ダメージ減少までの残り時間と現在の有効な攻撃力を計算
         const elapsedMilliseconds = currentTime - task.createdAt;
         const elapsedHours = elapsedMilliseconds / (1000 * 60 * 60);
         const damageReduction = Math.floor(elapsedHours / 2);
@@ -117,7 +116,7 @@ export const TodoList = ({
                   追加: {formatElapsedTime(task.createdAt)}
                   {minutesUntilNextReduction > 0 && (
                     <span className="ml-2">
-                      (あと{minutesUntilNextReduction}分でダメージ減少)
+                      (あと{minutesUntilNextReduction}分でダメージ1減少)
                     </span>
                   )}
                 </p>
