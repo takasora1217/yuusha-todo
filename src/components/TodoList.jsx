@@ -56,9 +56,17 @@ export const TodoList = ({
       });
 
       const completedTask = updatedTasks.find((task) => task.id === id);
-      const damage = completedTask.weight * 10;
+      const baseDamage = completedTask.weight * 10; // 元々のダメージ計算
+
+      // 経過時間に基づいてダメージを減らす
+      const elapsedMilliseconds = currentTime - completedTask.createdAt;
+      const elapsedHours = elapsedMilliseconds / (1000 * 60 * 60);
+      const damageReduction = Math.floor(elapsedHours / 2); // 2時間ごとにダメージを1減らす
+
+      const finalDamage = Math.max(1, baseDamage - damageReduction); // ダメージが1未満にならないようにする
+
       const newTaskList = updatedTasks.filter((task) => task.id !== id);
-      const newCompletedCount = completedCount + damage;
+      const newCompletedCount = completedCount + finalDamage; // 最終的なダメージを使用
 
       const newTasksCompletedCount =
         (JSON.parse(localStorage.getItem("tasksCompletedCount")) || 0) + 1;
@@ -85,31 +93,47 @@ export const TodoList = ({
 
   return (
     <>
-      {taskList.map((task) => (
-        <div
-          key={task.id}
-          className={`flex items-center space-x-2 transition-all duration-500 ${
-            animatingtask === task.id ? "transform translate-x-full" : ""
-          }`}
-        >
-          <div className="border-solid border-2 border-black w-80 h-auto items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4 py-2">
-            <span>{task.title} (重さ: {task.weight}) (攻撃力: {task.weight * 10})</span>
-            {task.createdAt && (
-              <p className="text-sm text-gray-500 mt-1">
-                追加: {formatElapsedTime(task.createdAt)}
-              </p>
-            )}
+      {taskList.map((task) => {
+        // ダメージ減少までの残り時間と現在の有効な攻撃力を計算
+        const elapsedMilliseconds = currentTime - task.createdAt;
+        const elapsedHours = elapsedMilliseconds / (1000 * 60 * 60);
+        const damageReduction = Math.floor(elapsedHours / 2);
+        const currentEffectiveDamage = Math.max(1, (task.weight * 10) - damageReduction);
+
+        const hoursUntilNextReduction = 2 - (elapsedHours % 2);
+        const minutesUntilNextReduction = Math.floor(hoursUntilNextReduction * 60);
+
+        return (
+          <div
+            key={task.id}
+            className={`flex items-center space-x-2 transition-all duration-500 ${
+              animatingtask === task.id ? "transform translate-x-full" : ""
+            }`}
+          >
+            <div className="border-solid border-2 border-black w-80 h-auto items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4 py-2">
+              <span>{task.title} (重さ: {task.weight}) (攻撃力: {currentEffectiveDamage})</span>
+              {task.createdAt && (
+                <p className="text-sm text-gray-500 mt-1">
+                  追加: {formatElapsedTime(task.createdAt)}
+                  {minutesUntilNextReduction > 0 && (
+                    <span className="ml-2">
+                      (あと{minutesUntilNextReduction}分でダメージ減少)
+                    </span>
+                  )}
+                </p>
+              )}
+            </div>
+            <div className="flex space-x-1">
+              <button onClick={() => handleDone(task.id)} className="mt-4">
+                <LuSwords size={28} />
+              </button>
+              <button onClick={() => handleDelete(task.id)} className="mt-4">
+                <FaTrashAlt size={28} />
+              </button>
+            </div>
           </div>
-          <div className="flex space-x-1">
-            <button onClick={() => handleDone(task.id)} className="mt-4">
-              <LuSwords size={28} />
-            </button>
-            <button onClick={() => handleDelete(task.id)} className="mt-4">
-              <FaTrashAlt size={28} />
-            </button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };
