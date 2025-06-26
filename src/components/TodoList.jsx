@@ -110,7 +110,11 @@ export const TodoList = ({
             }`}
           >
             <div className="border-solid border-2 border-black w-80 h-auto items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4 py-2">
-              <span>{task.title} (重さ: {task.weight}) (攻撃力: {currentEffectiveDamage})</span>
+              <span>
+                <span className="font-bold text-xl">{task.title}</span>{" "}
+                <span className="font-bold text-base text-gray-700">(重さ: <span className="text-xl text-blue-600">{task.weight}</span>)</span>{" "}
+                <span className="font-bold text-base text-gray-700">(攻撃力: <span className="text-xl text-red-600">{currentEffectiveDamage}</span>)</span>
+              </span>
               {task.createdAt && (
                 <p className="text-sm text-gray-500 mt-1">
                   追加: {formatElapsedTime(task.createdAt)}
