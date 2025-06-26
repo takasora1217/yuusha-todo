@@ -74,9 +74,10 @@ export const TodoList = ({
       const completedTasksFromStorage =
         JSON.parse(localStorage.getItem("completedTasks")) || [];
 
+      // 完了日時を保存
       completedTasksFromStorage.push({
         ...completedTask,
-        createdAt: completedTask.createdAt
+        completedAt: Date.now(), // タスクが完了した日時を追加
       });
       localStorage.setItem(
         "completedTasks",
@@ -116,12 +117,15 @@ export const TodoList = ({
                 <span className="font-bold text-base text-gray-700">(攻撃力: <span className="text-xl text-red-600">{currentEffectiveDamage}</span>)</span>
               </span>
               {task.createdAt && (
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-500 mt-1 leading-tight"> {/* leading-tightを追加 */}
                   追加: {formatElapsedTime(task.createdAt)}
                   {minutesUntilNextReduction > 0 && (
-                    <span className="ml-2">
-                      (あと{minutesUntilNextReduction}分でダメージ1減少)
-                    </span>
+                    <>
+                      <br />
+                      <span>
+                        あと{minutesUntilNextReduction}分でダメージ1減少 {/* 先頭のスペースを削除 */}
+                      </span>
+                    </>
                   )}
                 </p>
               )}

@@ -6,26 +6,17 @@ const CompletedTasks = () => {
   const [completedTasks, setCompletedtasks] = useState(
     JSON.parse(localStorage.getItem("completedTasks")) || []
   );
-
-  const formatElapsedTime = (timestamp) => {
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
-
-    if (seconds < 60) {
-      return `${seconds}秒前`;
-    }
-
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) {
-      return `${minutes}分前`;
-    }
-
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) {
-      return `${hours}時間前`;
-    }
-
-    const days = Math.floor(hours / 24);
-    return `${days}日前`;
+  const formatDateTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString('ja-JP', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false,
+    });
   };
 
   const handleDelete = (id) => {
@@ -59,7 +50,12 @@ const CompletedTasks = () => {
                       <span className="font-bold text-xl text-gray-700">{task.title}</span>
                       {task.createdAt && (
                         <p className="text-sm text-gray-500 mt-1">
-                          完了: {formatElapsedTime(task.createdAt)}
+                          追加: {formatDateTime(task.createdAt)}
+                        </p>
+                      )}
+                      {task.completedAt && (
+                        <p className="text-sm text-gray-500">
+                          完了: {formatDateTime(task.completedAt)}
                         </p>
                       )}
                     </div>
