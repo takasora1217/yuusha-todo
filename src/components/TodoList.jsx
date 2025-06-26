@@ -9,6 +9,7 @@ export const TodoList = ({
   setTaskList,
   completedCount,
   setCompletedCount,
+  setTasksCompletedCount,
 }) => {
   const [animatingtask, setAnimatingTask] = useState(null);
   const handleDelete = (id) => {
@@ -33,28 +34,31 @@ export const TodoList = ({
         //一致しない場合はそのままのタスクを返す
       });
 
-      const completedTasks = updatedTasks.find((task) => task.id === id);
-      //completedTasksを定義（定義内容：updateTasksから完了したタスクを取得してcompletedTasksに代入している/find()は条件に合う最初の要素を返す）
+      const completedTask = updatedTasks.find((task) => task.id === id); // Renamed to avoid conflict
+      const damage = completedTask.weight * 10; // タスクの重さかけ10ダメ
       const newTaskList = updatedTasks.filter((task) => task.id !== id);
-      //newTaskListを定義（定義内容：完了したタスクを除いた新しいタスクリストを作成する）
-      const newCompletedCount = completedCount + 1;
-      //newCompletedCountを定義（定義内容：完了したタスクの数をカウントする）
+      const newCompletedCount = completedCount + damage; // ダメージを累積
+
+      const newTasksCompletedCount =
+        (JSON.parse(localStorage.getItem("tasksCompletedCount")) || 0) + 1; // 達成した数を1増やす
 
       const completedTasksFromStorage =
         //completedTasksFromStorageを定義（定義内容：完了したタスクをローカルストレージに保存する）
         JSON.parse(localStorage.getItem("completedTasks")) || [];
       //ローカルストレージのcompleatedTasksから完了したタスクを取得して、completedTasksFromStorageに代入する/もしローカルストレージが空の場合は空の配列を代入する・JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要）
-      completedTasksFromStorage.push(completedTasks);
+      completedTasksFromStorage.push(completedTask);
       //completedTasksFromStorageに今回完了したタスク（completed)を追加する
       localStorage.setItem(
         "completedTasks",
         JSON.stringify(completedTasksFromStorage)
       );
-      //ローカルストレージにcompletedTasksFromStorageを保存する（変更を保存）/JSON.stringify()はオブジェクトを文字列に変換する
+      //ローカルストレージに完了した件数を保存する（変更を保存）/JSON.stringify()はオブジェクトを文字列に変換する
       localStorage.setItem("completedCount", newCompletedCount.toString());
       //ローカルストレージに完了した件数を保存する（変更を保存）/toString()は数値を文字列に変換する
+      localStorage.setItem("tasksCompletedCount", newTasksCompletedCount.toString()); // 新しい総数をローカルストレージに保存
       setTaskList(newTaskList);
       setCompletedCount(newCompletedCount);
+      setTasksCompletedCount(newTasksCompletedCount); // 新しい総数を更新
       console.log("completedCount", completedCount);
     }, 1000);
   };
@@ -69,7 +73,7 @@ export const TodoList = ({
           }`}
         >
           <div className="border-solid border-2 border-black w-80 h-8 items-center justify-between px-4 bg-gray-100 rounded-md shadow-md text-lg mt-4">
-            <span>{task.title}</span>
+            <span>{task.title} (重さ: {task.weight})</span> {/* 重さを表示 */}
           </div>
           <div className="flex space-x-1">
             <button onClick={() => handleDone(task.id)}className="mt-4">
