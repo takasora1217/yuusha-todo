@@ -1,6 +1,11 @@
-const ProgressBar = ({ completedCount }) => {
-  // Progress calculation now reflects total damage, resetting every 100 damage
-  const progress = Math.max(0, 100 - (completedCount % 100));
+const ProgressBar = ({ completedCount, isBossDefeated }) => {
+  let progress = Math.max(0, 100 - (completedCount % 100));
+
+  // ボス撃破アニメーション中はHPを0に固定する
+  if (isBossDefeated) {
+    progress = 0;
+  }
+  
   // 5個ごとにバーが0%になる
 
    // 濃緑(21,128,61)→赤(239,68,68)のグラデーション

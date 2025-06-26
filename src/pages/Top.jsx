@@ -17,10 +17,11 @@ import background from "../images/background.png";
 
 const Top = () => {
   const [animatingBoss, setanimatingBoss] = useState(false);
+  const [isBossDefeated, setIsBossDefeated] = useState(false);
+  const [animatingHeroAttack, setAnimatingHeroAttack] = useState(false);
+
   const [taskList, setTaskList] = useState(
     () => JSON.parse(localStorage.getItem("taskList")) || []
-    //ローカルストレージからタスクリストを取得して、taskListに代入する/もしローカルストレージが空の場合は空の配列を代入する
-    //JSON.parse()は文字列をオブジェクトに変換する（データを保存したり読み込んだりする時に重要
   );
   const [completedCount, setCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("completedCount")) || 0
@@ -29,20 +30,23 @@ const Top = () => {
   const [lastCongratCounts, setLastCongratCounts] = useState(
     () => JSON.parse(localStorage.getItem("lastCongratCounts")) || 0
   );
-  const [tasksCompletedCount, setTasksCompletedCount] = useState( // 新しい状態: 達成したTODOの総数
+  const [tasksCompletedCount, setTasksCompletedCount] = useState(
     () => JSON.parse(localStorage.getItem("tasksCompletedCount")) || 0
   );
+
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
   }, [taskList]);
+
   useEffect(() => {
     localStorage.setItem(
       "lastCongratCounts",
       JSON.stringify(lastCongratCounts)
     );
   }, [lastCongratCounts]);
+
   useEffect(() => {
-    localStorage.setItem("tasksCompletedCount", JSON.stringify(tasksCompletedCount)); // 達成したTODO数をローカルストレージに保存
+    localStorage.setItem("tasksCompletedCount", JSON.stringify(tasksCompletedCount));
   }, [tasksCompletedCount]);
  
   useEffect(() => {
@@ -54,25 +58,35 @@ const Top = () => {
     }
   }, [completedCount]);
 
-  // progress calculation changed to reflect total damage
+  useEffect(() => {
+    setanimatingBoss(false);
+  }, []);
+
+  useEffect(() => {
+    setAnimatingHeroAttack(false);
+  }, []);
+
   const progress = Math.max(0, 100 - (completedCount % 100));
 
-  // progressが0になったらcongratへ遷移
   useEffect(() => {
-    // Congratから戻った場合は遷移しない
-    // 合計ダメージが新たなボス討伐の閾値（100の倍数）を超えたときに遷移をトリガーする
     if (
       Math.floor(completedCount / 100) > Math.floor(lastCongratCounts / 100) &&
       lastCongratCounts !== completedCount
     ) {
-      setLastCongratCounts(completedCount);
-      navigate("/congrat");
+      setIsBossDefeated(true);
+      setTimeout(() => {
+        setLastCongratCounts(completedCount);
+        navigate("/congrat");
+        setIsBossDefeated(false);
+      }, 2000);
     }
   }, [completedCount, navigate, lastCongratCounts]);
- const bossImages = [boss, boss2, boss3, boss5, boss6 , boss7, boss8, boss11 , boss13];
+
+  const bossImages = [boss, boss2, boss3, boss5, boss6 , boss7, boss8, boss11 , boss13];
   const [bossImage,] = useState(
     bossImages[Math.floor(Math.random() * bossImages.length)]
   );
+
   return (
     <>
       <div
@@ -89,7 +103,7 @@ const Top = () => {
           <div className="w-full">
             <div className="font-bold ml-[15%] pt-2 text-2xl">HP</div>
             <div className="flex justify-center items-center">
-              <ProgressBar completedCount={completedCount} />
+              <ProgressBar completedCount={completedCount} isBossDefeated={isBossDefeated} />
             </div>
             <div className="font-bold text-2xl ml-[75%]">{progress}/100</div>
           </div>
@@ -102,7 +116,8 @@ const Top = () => {
                 setTaskList={setTaskList}
                 completedCount={completedCount}
                 setCompletedCount={setCompletedCount}
-                setTasksCompletedCount={setTasksCompletedCount} // 新しいセッター関数をTodoListに渡す
+                setTasksCompletedCount={setTasksCompletedCount}
+                setAnimatingHeroAttack={setAnimatingHeroAttack}
               />
             </div>
             {/* ここまでがTODO */}
@@ -112,11 +127,15 @@ const Top = () => {
                 src={bossImage}
                 alt="boss"
                 className={`w-72 transition-all duration-500 -mt-36 ${
-                  animatingBoss ? "animate-pulse p-4 rounded-md" : ""
-                }`}
+                  animatingBoss ? "boss-attack-shake" : ""
+                } ${isBossDefeated ? "boss-falling" : ""}`}
               />
               <InputForm taskList={taskList} setTaskList={setTaskList} />
-              <img src={yuusha} alt="yuusha" className="w-56" />
+              <img
+                src={yuusha}
+                alt="yuusha"
+                className={`w-56 ${animatingHeroAttack ? "hero-attack-animation" : ""}`}
+              />
             </div>
             {/* ここまでが写真と入力フォーム */}
             {/* ここからボタンなど */}
@@ -126,7 +145,6 @@ const Top = () => {
                   戦歴を振り返る
                 </button>
               </Link>
-              {/* Subjugation count now based on total damage divided by 100*/}
               <h5 className="font-bold text-6xl italic">
                 討伐数：{Math.floor(completedCount / 100)}
               </h5>

@@ -8,6 +8,7 @@ export const TodoList = ({
   completedCount,
   setCompletedCount,
   setTasksCompletedCount,
+  setAnimatingHeroAttack,
 }) => {
   const [animatingtask, setAnimatingTask] = useState(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
@@ -46,6 +47,14 @@ export const TodoList = ({
 
   const handleDone = (id) => {
     setAnimatingTask(id);
+    
+    if (setAnimatingHeroAttack) {
+      setAnimatingHeroAttack(true);
+      setTimeout(() => {
+        setAnimatingHeroAttack(false);
+      }, 1000); // 勇者の攻撃アニメーション長さ
+    }
+
     setTimeout(() => {
       setAnimatingTask(null);
       const updatedTasks = taskList.map((task) => {
@@ -77,7 +86,7 @@ export const TodoList = ({
       // 完了日時を保存
       completedTasksFromStorage.push({
         ...completedTask,
-        completedAt: Date.now(), // タスクが完了した日時を追加
+        completedAt: Date.now(), // タスクが完了した日時
       });
       localStorage.setItem(
         "completedTasks",
@@ -117,13 +126,13 @@ export const TodoList = ({
                 <span className="font-bold text-base text-gray-700">(攻撃力: <span className="text-xl text-red-600">{currentEffectiveDamage}</span>)</span>
               </span>
               {task.createdAt && (
-                <p className="text-sm text-gray-500 mt-1 leading-tight"> {/* leading-tightを追加 */}
+                <p className="text-sm text-gray-500 mt-1 leading-tight"> 
                   追加: {formatElapsedTime(task.createdAt)}
                   {minutesUntilNextReduction > 0 && (
                     <>
                       <br />
                       <span>
-                        あと{minutesUntilNextReduction}分でダメージ1減少 {/* 先頭のスペースを削除 */}
+                        あと{minutesUntilNextReduction}分でダメージ1減少
                       </span>
                     </>
                   )}
